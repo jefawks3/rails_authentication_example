@@ -37,7 +37,7 @@ Rails.application.configure do
   # Send emails to MailDev
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'smtp',
+    address: "smtp",
     port: 1025,
     enable_starttls_auto: false
   }
@@ -88,8 +88,8 @@ Rails.application.configure do
   # config.generators.apply_rubocop_autocorrect_after_generate!
 
   # Default url options
-  routes.default_url_options[:host] = 'localhost:3000'
+  routes.default_url_options[:host] = "localhost:3000"
 
   # Web console permissions for docker
-  config.web_console.whitelisted_ips = ['192.168.0.0/16']
+  config.web_console.whitelisted_ips = [ "192.168.0.0/16" ]
 end

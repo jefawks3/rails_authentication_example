@@ -1,0 +1,36 @@
+<h1>Your Account</h1>
+
+<%= render partial: 'flash' %>
+<%= render partial: 'model_errors', locals: { model: current_user } %>
+
+<h2>Account Information:</h2>
+
+<%= form_with model: current_user, url: accounts_path, method: :patch do |f| %>
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email, required: true %>
+  </div>
+  <div>
+    <%= f.submit 'Save changes' %>
+  </div>
+<% end %>
+
+<h2>Change Password</h2>
+
+<%= form_with model: current_user, url: change_password_accounts_path, method: :patch do |f| %>
+  <div>
+    <%= f.label :password_challenge, 'Old password' %>
+    <%= f.password_field :password_challenge %>
+  </div>
+  <div>
+    <%= f.label :password, 'New password' %>
+    <%= f.password_field :password %>
+  </div>
+  <div>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <div>
+    <%= f.submit 'Change Password' %>
+  </div>
+<% end %>

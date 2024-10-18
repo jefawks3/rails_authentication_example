@@ -1,0 +1,36 @@
+<p>
+  Site Map:
+</p>
+
+<ul>
+  <li>
+    <%= link_to 'Home', root_path %>
+  </li>
+  <% if user_signed_in? %>
+    <li>
+      <%= link_to 'Dashboard', dashboards_path %>
+    </li>
+    <li>
+      <%= link_to 'Account', accounts_path %>
+    </li>
+  <% else %>
+    <li>
+      <%= link_to 'Sign Up', new_registrations_path %>
+    </li>
+    <li>
+      <%= link_to 'Log In', new_sessions_path %>
+    </li>
+    <li>
+      <%= link_to 'Forgot password', new_passwords_path %>
+    </li>
+  <% end %>
+  <li>
+    <%= link_to 'Open Mailer', mailer_path, target: :_blank %>
+  </li>
+</ul>
+
+<% if user_signed_in? %>
+  <%= form_with url: sessions_path, method: :delete do |f| %>
+    <%= f.submit 'Log Out' %>
+  <% end %>
+<% end %>

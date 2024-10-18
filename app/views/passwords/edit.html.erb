@@ -1,0 +1,26 @@
+<h1>Change password</h1>
+
+<%= render partial: 'flash' %>
+<%= render partial: 'model_errors', locals: { model: @user } %>
+
+<%= form_with(
+      id: dom_id(User, :change_password),
+      model: @user,
+      method: :patch,
+      url: passwords_path,
+      data: { turbo: false }
+    ) do |f| %>
+  <%= hidden_field_tag :token, @user.generate_token_for(:password_reset) %>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password, required: true %>
+  </div>
+  <div>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, required: false %>
+  </div>
+  <div>
+    <%= f.submit 'Change password' %>
+  </div>
+<% end %>
+

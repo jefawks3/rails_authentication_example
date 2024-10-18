@@ -1,0 +1,12 @@
+<% if model.errors.any? %>
+  <p>
+    Errors:
+  </p>
+  <ul>
+    <% model.errors.full_messages.each do |msg| %>
+      <li>
+        <%= msg %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

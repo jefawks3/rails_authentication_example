@@ -1,0 +1,3 @@
+test:
+  email: test@example.com
+  password_digest: <%= User.new(password: 'correct_password').password_digest %>

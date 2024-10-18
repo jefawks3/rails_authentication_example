@@ -6,9 +6,22 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Render dynamic PWA files from app/views/pwa/*
-  get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-  get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "home#show"
+
+  # Authentication routes
+  resource :registrations, only: [ :new, :create ]
+  resource :sessions, only: [ :new, :create, :destroy ]
+  resource :passwords, only: [ :new, :create, :edit, :update ]
+
+  # User routes
+  resource :dashboards, only: :show
+  resource :accounts, only: [ :show, :update ] do
+    member do
+      patch :change_password
+    end
+  end
 end

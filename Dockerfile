@@ -9,7 +9,6 @@ WORKDIR /rails
 
 # Set production environment
 ENV RAILS_ENV="development" \
-    NODE_ENV="development" \
     BUNDLE_PATH="/usr/local/bundle"
 
 # Install packages needed to build gems and node modules
@@ -19,16 +18,6 @@ RUN apt-get update -qq && \
      pkg-config libglib2.0-dev libexpat1-dev libvips \
      node-gyp python-is-python3 \
      sqlite3
-
-# Install JavaScript dependencies
-ARG NODE_VERSION=20.15.1
-ARG YARN_VERSION=1.22.21
-
-ENV PATH=/usr/local/node/bin:$PATH
-RUN curl -sL https://github.com/nodenv/node-build/archive/master.tar.gz | tar xz -C /tmp/ && \
-    /tmp/node-build-master/bin/node-build "${NODE_VERSION}" /usr/local/node && \
-    npm install -g yarn@$YARN_VERSION && \
-    rm -rf /tmp/node-build-master
 
 # Entrypoint prepares the database.
 ENTRYPOINT ["./bin/docker-entrypoint"]

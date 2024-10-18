@@ -1,0 +1,17 @@
+<h1>Reset password</h1>
+
+<%= render partial: 'flash' %>
+
+<p>
+  Enter your email to send a reset password token.
+</p>
+
+<%= form_with id: dom_id(User, :reset_password_token), url: passwords_path, method: :post, data: { turbo: false } do |f| %>
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email, required: true %>
+  </div>
+  <div>
+    <%= f.submit 'Send token' %>
+  </div>
+<% end %>

@@ -1,0 +1,22 @@
+<h1>Register</h1>
+
+<%= render partial: 'flash' %>
+<%= render partial: 'model_errors', locals: { model: @user } %>
+
+<%= form_with model: @user, url: registrations_path do |f| %>
+  <div>
+    <%= f.label :email %>
+    <%= f.email_field :email, required: true %>
+  </div>
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password, required: true %>
+  </div>
+  <div>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, required: true %>
+  </div>
+  <div>
+    <%= f.submit 'Register' %>
+  </div>
+<% end %>
