@@ -1,0 +1,24 @@
+#!/bin/bash -e
+
+# Enable jemalloc for reduced memory usage and latency.
+if [ -z "${LD_PRELOAD+x}" ] && [ -f /usr/lib/*/libjemalloc.so.2 ]; then
+  export LD_PRELOAD="$(echo /usr/lib/*/libjemalloc.so.2)"
+fi
+
+# Install missing gems
+bundle check || bundle install --jobs 20 --retry 5
+
+# Install npm packages
+yarn install --network-timeout=30000
+
+# Remove a potentially pre-existing server.pid for Rails.
+rm -f tmp/pids/server.pid
+
+# Prepare the database
+if [ "$RAILS_ENV" == "test" ]
+then
+  echo 'Preparing Test Environment Database'
+  bundle exec rake test:prepare
+fi
+
+exec "${@}"

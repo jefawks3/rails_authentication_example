@@ -1,0 +1,28 @@
+volumes:
+  app_gems:
+networks:
+  smtp:
+  app:
+services:
+  smtp:
+    image: maildev/maildev
+    ports:
+      - '1080:1080'
+      - '1025:1025'
+    networks:
+      - smtp
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: "./bin/dev"
+    volumes:
+      - .:/rails
+      - app_gems:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    networks:
+      - app
+      - smtp
