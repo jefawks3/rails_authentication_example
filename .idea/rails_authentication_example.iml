@@ -45,7 +45,6 @@
     <orderEntry type="library" scope="PROVIDED" name="bigdecimal (v3.1.8, Remote: ruby-3.3.3 (-p89 (2)) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bindex (v0.8.1, Remote: ruby-3.3.3 (-p89 (2)) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bootsnap (v1.18.4, Remote: ruby-3.3.3 (-p89 (2)) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="brakeman (v6.2.1, Remote: ruby-3.3.3 (-p89 (2)) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="builder (v3.3.0, Remote: ruby-3.3.3 (-p89 (2)) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="bundler (v2.4.17, Remote: ruby-3.3.3 (-p89 (2)) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="capybara (v3.40.0, Remote: ruby-3.3.3 (-p89 (2)) [gem]" level="application" />
@@ -129,64 +128,76 @@
   <component name="RailsGeneratorsCache">
     <option name="generators">
       <list>
-        <option value="active_record:application_record" />
-        <option value="active_record:multi_db" />
-        <option value="application_record" />
-        <option value="benchmark" />
-        <option value="channel" />
+        <option value="active_record:migration" />
+        <option value="active_record:model" />
+        <option value="active_record:observer" />
+        <option value="active_record:session_migration" />
         <option value="controller" />
-        <option value="devcontainer" />
+        <option value="erb:controller" />
+        <option value="erb:mailer" />
+        <option value="erb:scaffold" />
         <option value="generator" />
         <option value="helper" />
         <option value="integration_test" />
-        <option value="jbuilder" />
-        <option value="job" />
-        <option value="mailbox" />
         <option value="mailer" />
+        <option value="metal" />
         <option value="migration" />
         <option value="model" />
+        <option value="model_subclass" />
+        <option value="observer" />
+        <option value="performance_test" />
+        <option value="plugin" />
         <option value="resource" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
-        <option value="stimulus" />
-        <option value="system_test" />
-        <option value="task" />
-        <option value="test_unit:channel" />
-        <option value="test_unit:generator" />
-        <option value="test_unit:install" />
-        <option value="test_unit:mailbox" />
+        <option value="session_migration" />
+        <option value="stylesheets" />
+        <option value="test_unit:controller" />
+        <option value="test_unit:helper" />
+        <option value="test_unit:integration" />
+        <option value="test_unit:mailer" />
+        <option value="test_unit:model" />
+        <option value="test_unit:observer" />
+        <option value="test_unit:performance" />
         <option value="test_unit:plugin" />
+        <option value="test_unit:scaffold" />
       </list>
     </option>
     <option name="myGenerators">
       <list>
-        <option value="active_record:application_record" />
-        <option value="active_record:multi_db" />
-        <option value="application_record" />
-        <option value="benchmark" />
-        <option value="channel" />
+        <option value="active_record:migration" />
+        <option value="active_record:model" />
+        <option value="active_record:observer" />
+        <option value="active_record:session_migration" />
         <option value="controller" />
-        <option value="devcontainer" />
+        <option value="erb:controller" />
+        <option value="erb:mailer" />
+        <option value="erb:scaffold" />
         <option value="generator" />
         <option value="helper" />
         <option value="integration_test" />
-        <option value="jbuilder" />
-        <option value="job" />
-        <option value="mailbox" />
         <option value="mailer" />
+        <option value="metal" />
         <option value="migration" />
         <option value="model" />
+        <option value="model_subclass" />
+        <option value="observer" />
+        <option value="performance_test" />
+        <option value="plugin" />
         <option value="resource" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
-        <option value="stimulus" />
-        <option value="system_test" />
-        <option value="task" />
-        <option value="test_unit:channel" />
-        <option value="test_unit:generator" />
-        <option value="test_unit:install" />
-        <option value="test_unit:mailbox" />
+        <option value="session_migration" />
+        <option value="stylesheets" />
+        <option value="test_unit:controller" />
+        <option value="test_unit:helper" />
+        <option value="test_unit:integration" />
+        <option value="test_unit:mailer" />
+        <option value="test_unit:model" />
+        <option value="test_unit:observer" />
+        <option value="test_unit:performance" />
         <option value="test_unit:plugin" />
+        <option value="test_unit:scaffold" />
       </list>
     </option>
   </component>
@@ -341,15 +352,6 @@
               </RakeTaskImpl>
             </subtasks>
           </RakeTaskImpl>
-          <RakeTaskImpl id="assets">
-            <subtasks>
-              <RakeTaskImpl description="Remove old compiled assets" fullCommand="assets:clean[keep]" id="clean[keep]" />
-              <RakeTaskImpl description="Remove compiled assets" fullCommand="assets:clobber" id="clobber" />
-              <RakeTaskImpl description="Load asset compile environment" fullCommand="assets:environment" id="environment" />
-              <RakeTaskImpl description="Compile all the assets named in config.assets.precompile" fullCommand="assets:precompile" id="precompile" />
-              <RakeTaskImpl description="" fullCommand="assets:clean" id="clean" />
-            </subtasks>
-          </RakeTaskImpl>
           <RakeTaskImpl id="cache_digests">
             <subtasks>
               <RakeTaskImpl description="Lookup first-level dependencies for TEMPLATE (like messages/show or comments/_comment.html)" fullCommand="cache_digests:dependencies" id="dependencies" />
@@ -453,45 +455,12 @@
               <RakeTaskImpl description="" fullCommand="db:truncate_all" id="truncate_all" />
             </subtasks>
           </RakeTaskImpl>
-          <RakeTaskImpl id="javascript">
-            <subtasks>
-              <RakeTaskImpl description="Build your JavaScript bundle" fullCommand="javascript:build" id="build" />
-              <RakeTaskImpl description="Remove JavaScript builds" fullCommand="javascript:clobber" id="clobber" />
-              <RakeTaskImpl description="Install JavaScript dependencies" fullCommand="javascript:install" id="install" />
-              <RakeTaskImpl id="install">
-                <subtasks>
-                  <RakeTaskImpl description="Install Bun" fullCommand="javascript:install:bun" id="bun" />
-                  <RakeTaskImpl description="Install esbuild" fullCommand="javascript:install:esbuild" id="esbuild" />
-                  <RakeTaskImpl description="Install rollup.js" fullCommand="javascript:install:rollup" id="rollup" />
-                  <RakeTaskImpl description="Install Webpack" fullCommand="javascript:install:webpack" id="webpack" />
-                </subtasks>
-              </RakeTaskImpl>
-            </subtasks>
-          </RakeTaskImpl>
           <RakeTaskImpl id="log">
             <subtasks>
               <RakeTaskImpl description="Truncate all/specified *.log files in log/ to zero bytes (specify which logs with LOGS=test,development)" fullCommand="log:clear" id="clear" />
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl description="Report code statistics (KLOCs, etc) from the application or engine" fullCommand="stats" id="stats" />
-          <RakeTaskImpl id="stimulus">
-            <subtasks>
-              <RakeTaskImpl description="Install Stimulus into the app" fullCommand="stimulus:install" id="install" />
-              <RakeTaskImpl id="install">
-                <subtasks>
-                  <RakeTaskImpl description="Install Stimulus on an app running bun" fullCommand="stimulus:install:bun" id="bun" />
-                  <RakeTaskImpl description="Install Stimulus on an app running importmap-rails" fullCommand="stimulus:install:importmap" id="importmap" />
-                  <RakeTaskImpl description="Install Stimulus on an app running node" fullCommand="stimulus:install:node" id="node" />
-                </subtasks>
-              </RakeTaskImpl>
-              <RakeTaskImpl id="manifest">
-                <subtasks>
-                  <RakeTaskImpl description="Show the current Stimulus manifest (all installed controllers)" fullCommand="stimulus:manifest:display" id="display" />
-                  <RakeTaskImpl description="Update the Stimulus manifest (will overwrite controllers/index.js)" fullCommand="stimulus:manifest:update" id="update" />
-                </subtasks>
-              </RakeTaskImpl>
-            </subtasks>
-          </RakeTaskImpl>
           <RakeTaskImpl description="Run all tests in test folder except system ones" fullCommand="test" id="test" />
           <RakeTaskImpl id="test">
             <subtasks>
@@ -553,18 +522,6 @@
               <RakeTaskImpl id="storage">
                 <subtasks>
                   <RakeTaskImpl description="" fullCommand="tmp:storage:clear" id="clear" />
-                </subtasks>
-              </RakeTaskImpl>
-            </subtasks>
-          </RakeTaskImpl>
-          <RakeTaskImpl id="turbo">
-            <subtasks>
-              <RakeTaskImpl description="Install Turbo into the app" fullCommand="turbo:install" id="install" />
-              <RakeTaskImpl id="install">
-                <subtasks>
-                  <RakeTaskImpl description="Install Turbo into the app with bun" fullCommand="turbo:install:bun" id="bun" />
-                  <RakeTaskImpl description="Install Turbo into the app with asset pipeline" fullCommand="turbo:install:importmap" id="importmap" />
-                  <RakeTaskImpl description="Install Turbo into the app with webpacker" fullCommand="turbo:install:node" id="node" />
                 </subtasks>
               </RakeTaskImpl>
             </subtasks>
