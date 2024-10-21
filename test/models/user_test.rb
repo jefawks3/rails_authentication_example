@@ -7,14 +7,28 @@ class UserTest < ActiveSupport::TestCase
     assert_not user.authenticate("incorrect_password")
   end
 
-  test "password challenge verification" do
-    user = User.create! email: "password-reset-#{SecureRandom.hex(4)}@example.com", password: "correct-password", password_confirmation: "correct-password"
-    assert_not user.update(password: "new-password", password_confirmation: "new-password", password_challenge: "bad-password")
+  test "password_confirmation verification" do
+    user = User.new password: "correct_password", password_confirmation: "bad_password"
+    assert_not user.valid?
+
+    user.password_confirmation = "correct_password"
+    assert user.valid?
+  end
+
+  test "password_challenge verification" do
+    user = users(:test)
+    assert_not user.update(password: "new_password", password_confirmation: "new_password", password_challenge: "bad_password")
     assert user.errors.of_kind?(:password_challenge, :invalid)
 
     user.errors.clear
-    assert user.update(password: "new-password", password_confirmation: "new-password", password_challenge: "correct-password")
-    assert user.authenticate("new-password")
+    assert user.update(password: "new_password", password_confirmation: "new_password", password_challenge: "correct_password")
+    assert user.authenticate("new_password")
+  end
+
+  test "finds and authenticates by email and password" do
+    user = users(:test)
+    assert_nil User.authenticate_by(email: user.email, password: "bad_password")
+    assert_equal user, User.authenticate_by(email: user.email, password: "correct_password")
   end
 
   test "has password reset token configuration" do
@@ -23,7 +37,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "password reset token" do
-    user = User.create! email: "password-reset-#{SecureRandom.hex(4)}@example.com", password: "correct-password", password_confirmation: "correct-password"
+    user = users(:test)
     token = user.generate_token_for :password_reset
 
     assert_equal user, User.find_by_token_for(:password_reset, token)
@@ -32,7 +46,7 @@ class UserTest < ActiveSupport::TestCase
       assert_nil User.find_by_token_for(:password_reset, token)
     end
 
-    user.update! password: "new-password", password_confirmation: "new-password"
+    user.update! password: "new_password", password_confirmation: "new_password"
 
     assert_nil User.find_by_token_for(:password_reset, token)
   end
