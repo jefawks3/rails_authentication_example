@@ -1,24 +1,18 @@
-# README
+# Rails Authentication Example
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an example application using Rails 7 built-in authentication methods.
 
-Things you may want to cover:
+## Setup
 
-* Ruby version
+### With Docker
 
-* System dependencies
+1) Run `docker compose up`
+2) Open `http://localhost:3000` in your browser
 
-* Configuration
+### Without Docker
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+1) Install Sqlite3 if you have not already
+2) Install [MailDev](https://github.com/maildev/maildev)
+3) Run `./bin/setup`
+4) Run `./bin/rails server -b 0.0.0.0 -p 3000`
+5) Open `http://localhost:3000` in your browser
